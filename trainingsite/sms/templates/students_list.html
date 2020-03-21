@@ -1,0 +1,36 @@
+{% extends 'inner-base.html' %}
+
+{% block content %}
+<table class="table">
+        <thead class="thead-inverse">
+        	<tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Applied Courses</th>
+        </tr>
+    </thead>
+    <tbody>
+	{% for student in students %}
+	<tr>
+		<td class="align-middle">{{student.user.first_name}}</td>
+		<td class="align-middle"><a href="mailto:{{student.user.email}}">{{student.user.email}}</a></td>
+		<td class="align-middle">{{student.mobile}}
+			<small>
+				{% if student.mobile %}
+					<a href="{% url 'send_sms' student.mobile %}"> SMS</a>
+				{% else %}
+					No Number
+				{% endif %}
+			</small>
+		</td>
+		<td class="align-middle">
+			{% for course in  student.course.all %}
+				{{course.course_name}}
+			{% endfor %}
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+{% endblock %}

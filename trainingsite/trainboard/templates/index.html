@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} Trainig Site {% endblock %}
+{% block content %}
+Sign up
+<br>
+<a href="{% url 'student-signup' %}">I am a student</a>
+<br>
+<a href="{% url 'tutor-signup' %}">I am a teacher</a>
+<br>
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+already have account <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+
+{% trans "List of availbale courses" %}
+{% get_current_language as LANGUAGE_CODE %} 
+
+<h1>{{ LANGUAGE_CODE }} </h1>
+
+<table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Course</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Begin</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for course in courses %}
+        <tr>
+            <td class="align-middle"><a href="{% url 'course_detail' course.pk %}">
+            {{ course.course_name }}</a></td>
+            <td class="align-middle">{{ course.description|truncatechars:30}}</td>
+            <td class="align-middle">{{ course.price }}</td>
+            <td class="align-middle">{{ course.begin_date}}</td> 
+            <!-- Remove time value in the template -->
+            <td class="align-middle">{{ course.end_date|date:"m D Y" }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+   </table>
+
+
+
+   <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for page in pages %}
+        <tr>
+            <td class="align-middle"><a href="">
+            {{ page.title }}</a></td>
+            <td class="align-middle">
+            {{ page.description|truncatechars:30}}</td>
+            <!-- Remove time value in the template -->
+        </tr>
+        {% endfor %}
+
+    </tbody>
+   </table>
+   
+{% endblock %}
+
+
+

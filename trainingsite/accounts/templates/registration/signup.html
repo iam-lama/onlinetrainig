@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% block title %} Trainig Site {% endblock %}
+{% block content %}
+Sign up
+<br>
+<a href="{% url 'student-signup' %}">I am a student</a>
+<br>
+<a href="{% url 'tutor-signup' %}">I am a teacher</a>
+<br>
+already have account <a href="{% url 'login' %}">Login</a>
+
+{% endblock %}

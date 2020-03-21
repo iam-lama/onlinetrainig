@@ -1,0 +1,51 @@
+{% extends 'inner-base.html' %}
+
+{% block title %} Checkout {%endblock%}
+
+{% block content %}
+<div class="form-style-5">
+    {{course.price}}
+	
+	 <form id="payment-form" method="POST" action="{% url 'payment' %}">
+	 	<input type='hidden' name='amount' value='{{course.price}}'> 
+	 	<input type='hidden' name='course_pk' value='{{course.pk}}'> 
+	 	<input type='text' name='amount' value='{{course.price}}' readonly>
+        <input type="hidden" id="nonce" name="payment_method_nonce" />
+
+	 	<div id="dropin-container"></div>
+
+	 	<button id="submit-button" type="submit">Pay</button>
+
+	 </form>
+
+  
+
+
+<!-- <input type='hidden' id='client_token' value='{{student.accountants.client_token}}'> 
+<form id="checkout" method="POST" action="{% url 'payment' %}">
+    <div id="payment-form">
+       <input type='hidden' name='amount' value='{{course.price}}'> 
+       Price:<input type='text' name='amount' value='{{course.price}}' readonly>
+       <legend><span class="number">2</span> Credit Card Info</legend>
+		<input type="text" name="cnumber" placeholder="credit card number " >
+		<input type="text" name="cvv" placeholder="cvv">
+		<input type="text" name="year" placeholder="ex year">
+		<input type="text" name="month" placeholder="ex month">
+    </div>
+    <button type="submit" class="btn btn-primary">Pay</button>
+</form>
+
+</div>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+
+var clientToken = document.getElementById('client_token').value;
+// creating payment method nonse
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script> -->
+
+{% endblock %}

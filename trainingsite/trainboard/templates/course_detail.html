@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Trainig Site| Course Details  {% endblock %}
+
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href ="{% url 'index' %}">Home</a></li>
+<li class="breadcrumb-item">Courses</li>
+<li class="breadcrumb-item active">{{course.course_name}}</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+
+	<div class="col-md-8">Course: {{course.course_name}}</div>
+	<div class="col-md-8">Description: {{ course.description }}</div>
+	<div class="col-md-8">Price: {{ course.price }}</div>
+	<div class="col-md-8">Begin: {{ course.begin_date }}</div>
+	<div class="col-md-8">End: {{ course.end_date }}</div>
+	<div class="col-md-8">
+	<a href="{% url 'course_apply' course.pk%}"> Apply for this course</a>
+	</div>
+
+<!-- 	<form method="POST" novalidate>
+		{% csrf_token %}
+		 <input type="hidden" name="next" value="{{next}}">
+		 <input type="hidden" name="course" value="{{course.pk}}">
+		 {{ form|crispy }}
+		 <button type="submit" class="btn btn-primary btn-block">Apply for this Course</button>
+	</form> -->
+</div>
+{% endblock %}

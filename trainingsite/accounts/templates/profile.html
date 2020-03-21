@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} My Account {% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+Welcome {{user.first_name}} {{user.last_name}},
+<br>
+Personal Information:
+
+Email: {{user.email}}
+<div class="row">
+<div class="col-md-8">Country: {{request.user.user_profile.country}}</div>
+<div class="col-md-8">Region: {{request.user.user_profile.region}}</div>
+<div class="col-md-8">sex: {{request.user.user_profile.sex}}</div>
+<div class="col-md-8">mobile: {{request.user.user_profile.mobile}}</div>
+<div class="col-md-8">id_num: {{request.user.user_profile.id_num}}</div>
+<div class="col-md-8">
+<img src="{{request.user.user_profile.id_image.url}}" style="width:50px; height:50px;">
+</div>
+<div class="col-md-8">
+Courses:
+{% for course in request.user.user_profile.course.all %}
+	Name: {{course.course_name}}
+	<br>
+{% endfor %}
+</div>
+</div>
+
+<a href="{% url 'student-edit' user.pk %}">Edit</a> 
+
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Logout {% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="text-center logo my-4">
+    <a href="{% url 'index' %}"> Training site</a>
+  </h1>
+
+<div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Login</h3>
+            <form method="POST" novalidate>
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{next}}">
+              {{ form| crispy }}
+              <button type="submit" class="btn btn-primary btn-block">Log out</button>
+            </form>
+          </div>
+          <div class="card-footer text-muted text-center">
+            Create new account? <a href="">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
